@@ -1,0 +1,16 @@
+{
+  "name": "cusdis-telegram-bot",
+  "version": "1.0.0",
+  "description": "A telegram bot for cusdis",
+  "scripts": {},
+  "author": "WingLim",
+  "license": "MIT",
+  "devDependencies": {
+    "@vercel/node": "^1.12.1"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "redis": "^4.0.0-rc.3",
+    "telegraf": "^4.4.2"
+  }
+}
