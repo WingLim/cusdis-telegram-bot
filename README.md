@@ -1,5 +1,7 @@
 # cusdis-telegram-bot
 
+![GitHub deployments](https://img.shields.io/github/deployments/WingLim/cusdis-telegram-bot/production?label=vercel&logo=vercel&logoColor=white)
+
 Another telegram bot for [Cusdis](https://github.com/djyde/cusdis)
 
 Inspied by offical Cusdis bot [cusdis-telegram-bot](https://github.com/djyde/cusdis-telegram-bot)
