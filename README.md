@@ -8,7 +8,9 @@ Inspied by offical Cusdis bot [cusdis-telegram-bot](https://github.com/djyde/cus
 
 ## Features
 
-Notice: these features are based on a redis server, we will automatically delete it after **Approve** and **Append** action.
+> These features are based on saving approve link with token to a redis server
+> 
+> We will automatically delete it after **Approve** and **Append** action.
 
 1. Approve comment in bot
 2. Append comment in bot
