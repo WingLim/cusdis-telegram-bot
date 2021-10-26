@@ -32,12 +32,18 @@ bot.on('callback_query', async (ctx) => {
             let key = chatId.toString() + callback.message.message_id.toString()
             
             await client.connect()
-            let link = (await client.get(key)).replace("open", "api/open")
-            let res = await axios.post(link)
+            let link = await client.get(key)
+            if (link) {
+                let api = link.replace("open", "api/open")
+
+                let res = await axios.post(api)
             
-            if (res.status == 200) {
-                ctx.answerCbQuery("Approved")
-                await client.del(key)
+                if (res.status == 200) {
+                    ctx.answerCbQuery("Approved")
+                    await client.del(key)
+                }
+            } else {
+                ctx.reply("Fail to get link")
             }
             break
         }
