@@ -40,12 +40,11 @@ bot.on('callback_query', async (ctx) => {
             
                 if (res.status == 200) {
                     ctx.answerCbQuery("Successed")
-                    await client.del(key)
                 } else {
                     ctx.answerCbQuery("Failed")
                 }
             } else {
-                ctx.reply("Fail to get link")
+                ctx.reply("Token has expired")
             }
             break
         }
@@ -67,12 +66,11 @@ bot.on('text', async (ctx) => {
             })
             if (res.status == 200) {
                 ctx.reply("Success to append comment")
-                await client.del(key)
             } else {
                 ctx.reply("Fail to append comment")
             }
         } else {
-            ctx.reply("Fail to get link")
+            ctx.reply("Token has expired")
         }
     }
 })
