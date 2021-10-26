@@ -52,6 +52,31 @@ bot.on('callback_query', async (ctx) => {
     }
 })
 
+bot.on('text', async (ctx) => {
+    if (ctx.message.reply_to_message) {
+        let reply_msg = ctx.message.reply_to_message
+        let key = ctx.chat.id.toString() + reply_msg.message_id.toString()
+        let replyContent = ctx.message.text
+
+        await client.connect()
+        let link = await client.get(key)
+        if (link) {
+            let api = link.replace("open", "api/open")
+            let res = await axios.post(api, {
+                replyContent
+            })
+            if (res.status == 200) {
+                ctx.reply("Success to append comment")
+                await client.del(key)
+            } else {
+                ctx.reply("Fail to append comment")
+            }
+        } else {
+            ctx.reply("Fail to get link")
+        }
+    }
+})
+
 export default async (req: VercelRequest, res: VercelResponse) => {
     try {
         await bot.handleUpdate(req.body, res)
