@@ -39,7 +39,7 @@ bot.on('callback_query', async (ctx) => {
                 let res = await axios.post(api)
             
                 if (res.status == 200) {
-                    ctx.answerCbQuery("Approved")
+                    ctx.answerCbQuery("Successed")
                     await client.del(key)
                 } else {
                     ctx.answerCbQuery("Failed")
