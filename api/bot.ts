@@ -41,6 +41,8 @@ bot.on('callback_query', async (ctx) => {
                 if (res.status == 200) {
                     ctx.answerCbQuery("Approved")
                     await client.del(key)
+                } else {
+                    ctx.answerCbQuery("Failed")
                 }
             } else {
                 ctx.reply("Fail to get link")
