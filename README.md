@@ -6,9 +6,9 @@ Another telegram bot for [Cusdis](https://github.com/djyde/cusdis)
 
 Inspied by offical Cusdis bot [cusdis-telegram-bot](https://github.com/djyde/cusdis-telegram-bot)
 
-## Feature
+## Features
 
-Notice: these feature base on a redis server, we will automatically delete it after 1 and 2 action.
+Notice: these features are based on a redis server, we will automatically delete it after **Approve** and **Append** action.
 
 1. Approve comment in bot
 2. Append comment in bot
