@@ -56,7 +56,6 @@ by: <strong>${data.by_nickname}</strong>`
                 let key = (chatId as string) + new_msg.message_id.toString()
                 await client.connect()
                 await client.set(key, data.approve_link)
-                await client.set("the_key", key)
                 break
             }
         }
