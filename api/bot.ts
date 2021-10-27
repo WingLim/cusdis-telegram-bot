@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { webhookCallback } from 'grammy'
+import { InlineKeyboard, webhookCallback } from 'grammy'
 import { client } from '../redis'
 import { bot } from '../index'
 import axios from 'axios'
@@ -14,6 +14,15 @@ bot.command('gethook', async (ctx) => {
     let chanId = ctx.message.chat.id
     let hookUrl = `https://${VERCEL_URL}/api/hook/${chanId}`
     await ctx.reply(`Your Webhook URL:\n ${hookUrl}`)
+})
+
+bot.command('about', async (ctx) => {
+    let links = new InlineKeyboard()
+        .url('Github', 'https://github.com/WingLim/cusdis-telegram-bot').row()
+        .url('Cusdis', 'https://cusdis.com/')
+    await ctx.reply('Another telegram bot for Cusdis', {
+        reply_markup: links
+    })
 })
 
 bot.callbackQuery('approve', async (ctx) => {
