@@ -1,59 +1,54 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { Telegraf } from 'telegraf'
+import { InlineKeyboard } from 'grammy'
 import { client } from '../../redis'
-
-const { BOT_TOKEN } = process.env
-
-const bot = new Telegraf(BOT_TOKEN)
+import { bot } from '../../index'
 
 enum HookType {
     NewComment = 'new_comment'
 }
 
-type NewCommentBody = {
-    type: HookType.NewComment;
-    data: {
-        by_nickname: string;
-        by_email: string;
-        content: string;
-        page_id: string;
-        page_title: string;
-        project_title: string
-        approve_link: string;
-    }
+type HookBody<T> = {
+    type: HookType
+    data: T
 }
 
-export default async (req: VercelRequest, res: VercelResponse) => {
-    if (req.method === 'POST') {
-        const { chatId } = req.query
-        const { type, data } = req.body as NewCommentBody
+type NewCommentHookData = {
+    by_nickname: string;
+    by_email: string;
+    content: string;
+    page_id: string;
+    page_title: string;
+    project_title: string
+    approve_link: string;
+}
 
-        switch (type) {
-            case 'new_comment': {
-                const msg = `New comment on website <strong>${
-                    data.project_title
-                }</strong> in page <strong>${data.page_title}</strong>:
+function buildNewCommentMsg(data: NewCommentHookData) {
+    return `New comment on website <strong>${
+        data.project_title
+    }</strong> in page <strong>${data.page_title}</strong>:
 <pre>
 ${data.content.replace(/<[^>]*>?/gm, "")}
 </pre>
 by: <strong>${data.by_nickname}</strong>`
+}
+
+export default async (req: VercelRequest, res: VercelResponse) => {
+    if (req.method === 'POST') {
+        const chatId = req.query['chatId'] as string
+        const { type, data } = req.body as HookBody<NewCommentHookData>
+
+        switch (type) {
+            case 'new_comment': {
+                const msg = buildNewCommentMsg(data)
                 
-                let new_msg = await bot.telegram.sendMessage(chatId as string, msg, {
+                const approveKeyboard = new InlineKeyboard().text('Approve', 'approve')
+
+                let new_msg = await bot.api.sendMessage(chatId, msg, {
                     parse_mode: 'HTML',
-                    reply_markup: {
-                        inline_keyboard: [
-                            [
-                                {
-                                    text: "Approve",
-                                    //url: data.approve_link
-                                    callback_data: "approve"
-                                }
-                            ]
-                        ]
-                    }
+                    reply_markup: approveKeyboard
                 })
 
-                let key = (chatId as string) + new_msg.message_id.toString()
+                let key = chatId + new_msg.message_id.toString()
                 await client.connect()
                 await client.set(key, data.approve_link, {
                     EX: 259200
