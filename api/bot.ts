@@ -1,10 +1,11 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { InlineKeyboard, webhookCallback } from 'grammy'
+import { Bot, InlineKeyboard, webhookCallback } from 'grammy'
 import { client } from '../redis'
-import { bot } from '../index'
 import axios from 'axios'
 
-const { VERCEL_URL } = process.env
+const { BOT_TOKEN, VERCEL_URL } = process.env
+
+export const bot = new Bot(BOT_TOKEN)
 
 bot.command('start', async (ctx) => {
     await ctx.reply('Welcome to use Cusdis Bot')

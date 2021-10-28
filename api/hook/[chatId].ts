@@ -1,7 +1,7 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { InlineKeyboard } from 'grammy'
 import { client } from '../../redis'
-import { bot } from '../../index'
+import { bot } from '../bot'
 
 enum HookType {
     NewComment = 'new_comment'

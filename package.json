@@ -1,12 +1,16 @@
 {
   "name": "cusdis-telegram-bot",
   "version": "1.0.0",
-  "description": "A telegram bot for cusdis",
-  "scripts": {},
+  "description": "Another telegram bot for cusdis",
+  "scripts": {
+    "webhook": "vercel env pull && node -r dotenv/config index.js"
+  },
+  "type": "module",
   "author": "WingLim",
   "license": "MIT",
   "devDependencies": {
-    "@vercel/node": "^1.12.1"
+    "@vercel/node": "^1.12.1",
+    "dotenv": "^10.0.0"
   },
   "dependencies": {
     "axios": "^0.23.0",
