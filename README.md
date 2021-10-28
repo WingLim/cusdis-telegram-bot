@@ -22,3 +22,9 @@ Inspied by offical Cusdis bot [cusdis-telegram-bot](https://github.com/djyde/cus
 1. Open and start bot [@CusdisxBot](https://t.me/cusdisxbot)
 2. Send `/gethook` command
 3. Copy and paste the URL in Cusdis project's webhook settings
+
+
+## Thanks to
+
+- [Cusdis](https://github.com/djyde/cusdis) - A lightweight, privacy-friendly comment system
+- [grammY](https://github.com/grammyjs/grammY) - The best telegram bot framework in typescript I have used
