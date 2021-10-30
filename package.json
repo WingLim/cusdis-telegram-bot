@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "Another telegram bot for cusdis",
   "scripts": {
-    "webhook": "vercel env pull && node -r dotenv/config index.js"
+    "webhook": "node --loader ts-node/esm -r dotenv/config index.ts"
   },
   "type": "module",
   "author": "WingLim",
   "license": "MIT",
   "devDependencies": {
     "@vercel/node": "^1.12.1",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "ts-node": "^10.4.0"
   },
   "dependencies": {
     "axios": "^0.23.0",
