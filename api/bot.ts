@@ -3,7 +3,7 @@ import { Bot, InlineKeyboard, webhookCallback, Context, Filter } from 'grammy'
 import { client } from '../redis'
 import axios from 'axios'
 
-const { BOT_TOKEN, VERCEL_URL } = process.env
+const { BOT_TOKEN, BOT_URL } = process.env
 
 export const bot = new Bot(BOT_TOKEN)
 
@@ -15,7 +15,7 @@ bot.command('start', async (ctx) => {
 // Handle /gethook command
 bot.command('gethook', async (ctx) => {
     let chanId = ctx.message.chat.id
-    let hookUrl = `https://${VERCEL_URL}/api/hook/${chanId}`
+    let hookUrl = `${BOT_URL}/api/hook/${chanId}`
     await ctx.reply(`Your Webhook URL:\n ${hookUrl}`)
 })
 
